@@ -35,3 +35,17 @@ docker run -d -p 1521:1521 --name test-oracle  --restart unless-stopped \
 ./wait-container-ready.sh test-oracle "DATABASE IS READY TO USE!"
 
 #docker exec -it test-oracle sqlplus sampledb/${TEST_ORACLE_PWD}@XE
+
+echo "Sqlserver setup for local environment"
+docker stop test-sqlserver && docker rm test-sqlserver
+docker run -d -p 1433:1433 --name test-sqlserver  --restart unless-stopped \
+  -e SA_PASSWORD="$TEST_SQLSERVER_PWD" \
+  -e TEST_SQLSERVER_PWD="$TEST_SQLSERVER_PWD" \
+  -e "ACCEPT_EULA=Y" -e "MSSQL_PID=Developer" \
+  -v /${PWD}/sqlserver:/setup.d \
+  mcr.microsoft.com/mssql/server:2017-latest
+./wait-container-ready.sh test-sqlserver "SQL Server is now ready for client connections"
+# SQLServer does not have an on startup script, run it now
+docker exec test-sqlserver bash -c "./setup.d/sqlserver-setup.sh"
+
+#/opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P $TEST_SQLSERVER_PWD -Q "select name from sys.databases"
