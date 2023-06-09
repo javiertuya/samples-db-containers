@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>giis</groupId>
+  <artifactId>samples-db-containers</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+	<name>samples-db-containers</name>
+	<description>
+		Sample of using containers for test databases (Postgres, Oracle and SQL Server)
+	</description>
+	<url>https://github.com/javiertuya/samples-db-containers</url>
+	<organization>
+		<name>Software Engineering Research Group (GIIS) - Universidad de Oviedo, ES</name>
+		<url>http://giis.uniovi.es/</url>
+	</organization>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.13.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.36</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.2.12</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.microsoft.sqlserver</groupId>
+				<artifactId>mssql-jdbc</artifactId>
+				<version>12.2.0.jre8</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>42.6.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.oracle.database.jdbc</groupId>
+				<artifactId>ojdbc8</artifactId>
+				<version>23.2.0.0</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+</project>

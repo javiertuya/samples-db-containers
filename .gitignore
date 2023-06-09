@@ -1,0 +1,7 @@
+target
+pom.xml.versionsBackup
+TESTS-TestSuites.xml
+# to prevent push credentials file
+/setup/environment.properties
+# to allow each developer customize sonarlint
+org.sonarlint.eclipse.core.prefs
