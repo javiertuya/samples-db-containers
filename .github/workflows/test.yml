@@ -1,4 +1,4 @@
-name: test-all2
+name: test-all
 on:
   push:
     branches-ignore:
@@ -16,6 +16,10 @@ jobs:
   test-postgres:
     runs-on: ubuntu-latest
     #if: ${{ false }}  # disable for now
+    strategy:
+      matrix:
+        dbms: [Postgres]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -25,6 +29,7 @@ jobs:
           cache: 'maven'
 
       - name: Launch Postgres
+        if: ${{ matrix.dbms == 'Postgres' }}
         run: |
           docker run -d -p 5432:5432 --name test-postgres  --restart unless-stopped \
             -e POSTGRES_PASSWORD="$TEST_POSTGRES_PWD" \
@@ -32,5 +37,5 @@ jobs:
             -v ${GITHUB_WORKSPACE}/setup/postgres:/docker-entrypoint-initdb.d \
             postgres:14
 
-      - name: Test Postgres
-        run: mvn test -Dtest=**/TestPostgres* --no-transfer-progress
+      - name: Test ${{ matrix.dbms }}
+        run: mvn test -Dtest=**/Test${{ matrix.dbms }}* --no-transfer-progress
