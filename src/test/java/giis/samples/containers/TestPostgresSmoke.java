@@ -9,6 +9,7 @@ public class TestPostgresSmoke extends Base {
 	
 	@Test
 	public void testPostgresQuery() throws SQLException, IOException {
+		setUp("postgres");
 		testAndAssertQuery("postgres");
 	}
 }

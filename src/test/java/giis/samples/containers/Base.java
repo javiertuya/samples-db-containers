@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,9 +21,8 @@ public class Base {
 	private static final String DATABASE_PROPERTIES = "setup/database.properties";
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Before
-	public void setUp() throws SQLException, IOException {
-		try (Connection conn = getConnection("postgres"); Statement stmt = conn.createStatement()) {
+	public void setUp(String dbmsVendor) throws SQLException, IOException {
+		try (Connection conn = getConnection(dbmsVendor); Statement stmt = conn.createStatement()) {
 			try {
 				stmt.execute("drop table stable");
 			} catch (SQLException e) {
@@ -52,7 +50,7 @@ public class Base {
 	 * password is obtained from environment, if not defined, another properties file is used as fallback
 	 */
 	protected Connection getConnection(String dbmsVendor) throws SQLException, FileNotFoundException, IOException {
-		log.debug("Create connection to '{}' database", "postgres");
+		log.debug("Create connection to '{}' database", dbmsVendor);
 		return DriverManager.getConnection(
 				getProp(DATABASE_PROPERTIES, "test." + dbmsVendor + ".url"), 
 				getProp(DATABASE_PROPERTIES, "test." + dbmsVendor + ".user"),

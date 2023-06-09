@@ -15,10 +15,23 @@ cd $SCRIPT_DIR
 # Required environment variables can be set in this file
 source ./environment.properties
 
-# Postgres setup for local environment
+echo "Postgres setup for local environment"
 # Note the / in the volume bind, required when running under some windows shells (e.g. mingw)
 docker stop test-postgres && docker rm test-postgres
 docker run -d -p 5432:5432 --name test-postgres  --restart unless-stopped \
   -e POSTGRES_PASSWORD="$TEST_POSTGRES_PWD" \
   -e TEST_POSTGRES_PWD="$TEST_POSTGRES_PWD" \
-  -v /${PWD}/postgres:/docker-entrypoint-initdb.d postgres:14
+  -v /${PWD}/postgres:/docker-entrypoint-initdb.d \
+  postgres:14
+./wait-container-ready.sh test-postgres "END SETUP!"
+
+echo "Oracle setup for local environment"
+docker stop test-oracle && docker rm test-oracle
+docker run -d -p 1521:1521 --name test-oracle  --restart unless-stopped \
+  -e ORACLE_PASSWORD=$TEST_ORACLE_PWD \
+  -e TEST_ORACLE_PWD="$TEST_ORACLE_PWD" \
+  -v /${PWD}/oracle:/container-entrypoint-initdb.d \
+  gvenzl/oracle-xe:11.2.0.2-slim-faststart
+./wait-container-ready.sh test-oracle "DATABASE IS READY TO USE!"
+
+#docker exec -it test-oracle sqlplus sampledb/${TEST_ORACLE_PWD}@XE
