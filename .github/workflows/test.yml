@@ -50,4 +50,5 @@ jobs:
           chmod u+x setup/wait-container-ready.sh && ./setup/wait-container-ready.sh test-oracle "DATABASE IS READY TO USE!"
 
       - name: Test ${{ matrix.dbms }}
-        run: mvn test -Dtest=**/Test${{ matrix.dbms }}* --no-transfer-progress
+        run: mvn test -Dtest=**/Test${{ matrix.dbms }}* --no-transfer-progress -Duser.timezone=Europe/Madrid
+        #Note: must specify a timezone to avoid ORA-01882: timezone region not found
