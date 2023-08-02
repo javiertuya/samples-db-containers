@@ -4,14 +4,10 @@ updates:
     directory: "/java"
     schedule:
       interval: monthly
-    assignees:
-      - "javiertuya" 
     open-pull-requests-limit: 20
 
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: monthly
-    assignees:
-      - "javiertuya" 
     open-pull-requests-limit: 20
