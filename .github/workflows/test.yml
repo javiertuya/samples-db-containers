@@ -24,7 +24,7 @@ jobs:
         dbms: [Postgres, Oracle, Sqlserver]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Select Java Version
         uses: actions/setup-java@v4
         with:
