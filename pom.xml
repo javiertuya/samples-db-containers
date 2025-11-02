@@ -40,7 +40,7 @@
 			<dependency>
 				<groupId>com.microsoft.sqlserver</groupId>
 				<artifactId>mssql-jdbc</artifactId>
-				<version>13.2.0.jre8</version>
+				<version>13.2.1.jre8</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -52,7 +52,7 @@
 			<dependency>
 				<groupId>com.oracle.database.jdbc</groupId>
 				<artifactId>ojdbc8</artifactId>
-				<version>23.9.0.25.07</version>
+				<version>23.26.0.0.0</version>
 				<scope>test</scope>
 			</dependency>
 
