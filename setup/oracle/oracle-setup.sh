@@ -1,7 +1,7 @@
 # Execution of postgres commands at startup
 # note the first line specifying the shel is removed to avoid provelem with line breaks in windows
 echo "-- Begin setup"
-sqlplus system/${TEST_ORACLE_PWD}@XE  <<-EOSQL
+sqlplus system/${TEST_ORACLE_PWD}@FREE  <<-EOSQL
   create user sampledb identified by "$TEST_ORACLE_PWD" ACCOUNT UNLOCK;
   grant connect to sampledb;
   grant create session to sampledb;
