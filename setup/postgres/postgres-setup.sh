@@ -3,6 +3,6 @@
 echo "-- Begin setup"
 psql -v ON_ERROR_STOP=1   <<-EOSQL
   CREATE USER sampledb with encrypted password '$TEST_POSTGRES_PWD';
-  CREATE DATABASE sampledb;
+  CREATE DATABASE sampledb OWNER sampledb;
 EOSQL
 echo "-- END SETUP!"
